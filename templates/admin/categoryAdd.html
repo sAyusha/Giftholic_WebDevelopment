@@ -20,11 +20,11 @@
     </div>
     <div class="col">
         <h3>Category List</h3>
-        <ul style="height: 60vh; overflow-y: scroll;" class="list-group list-group-flush">
+        <ul class="list-group list-group-flush">
             {% for cat in categories %}
-            <div class="d-flex justify-content-between align-items-center " style="padding-left:15px; padding-right:15px; border-bottom: 0.2px solid rgb(211, 211, 211);">
+            <div class="d-flex justify-content-between align-items-center cat-list">
                 <li class="list-group-item">{{cat}}</li>
-                <a href="{% url 'categoryDelete' cat.id %}">Delete</a>
+                <a href="{% url 'categoryDelete' cat.id %}" class="btn btn-danger">Delete</a>
             </div>
             {% endfor %}
           </ul>

@@ -47,24 +47,24 @@ def adminpanelLogin(request):
 
 @login_required(login_url='adminpanelLogin')
 def adminHome(request):
-    # order = Order.obejcts.all()
+    order = Order.objects.all()
     customer = Customer.objects.all()
 
     total_customer = customer.count()
 
-    # toal_order = order.count()
-    # delivered = order.filter(status='Delivered').count()
-    # pending = order.filter(status='Pending').count()
+    toal_order = order.count()
+    delivered = order.filter(status='Delivered').count()
+    pending = order.filter(status='Pending').count()
 
     context={
-        # 'order':order,
+        'order':order,
         'customer':customer,
         'total_customer': total_customer,
-        # 'total_order':toal_order,
-        # 'delivered':delivered,
-        # 'pending':pending,
+        'total_order':toal_order,
+        'delivered':delivered,
+        'pending':pending,
     }
-    return render(request,'admin/adminHome.html',context)
+    return render(request, 'admin/adminHome.html' ,context)
 
 def logoutAdmin(request):
     logout(request)
@@ -180,7 +180,9 @@ def orderEdit(request, pk):
             form.save()
             return redirect('admindashboard')
 
-    context = {}
+    context = {
+        'form':form
+    }
     return render(request, 'admin/orderAdd.html', context)
 
 def deleteOrder(request, pk):
@@ -192,4 +194,4 @@ def deleteOrder(request, pk):
     context = {
         'item':order
     }
-    return render(request, 'admin/orderDelete.html',context)
+    return render(request, 'admin/orderDelete.html', context)

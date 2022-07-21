@@ -27,7 +27,7 @@
     <tbody>
             {% for product in allProducts %}
             <tr>
-                <th scope="row"><img style="width: 100px; height: 100px;" src="{{product.image.url}}" alt=""></th>
+                <th scope="row"><img style="width: 100px; height: 100px;" src="{{product.imageURL}}" alt=""></th>
                 <th scope="row">{{product.id}}</th>
                 <td>{{product.name}}</td>
                 <td>{{product.price}}</td>
@@ -38,7 +38,7 @@
                         In Stock
                     </div>
                     {% else %}
-                    <div style="background-color: #FCCCCD; color: #910001;" class="availabilityCtn">
+                    <div class="availabilityCtn bg-light text-danger">
                         Out of Stock
                     </div>
                     {% endif %}

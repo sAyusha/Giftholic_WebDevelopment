@@ -15,5 +15,5 @@ urlpatterns = [
     path("categoryDelete/<int:catId>", views.delCategory, name="categoryDelete") ,
     path("order_add",views.addOrder, name="order_add"),
     path("order_edit/<str:pk>/",views.orderEdit, name="order_edit"),
-    path("delete_order",views.deleteOrder, name="delete_order")
+    path("delete_order/<str:pk>/",views.deleteOrder, name="delete_order")
 ]

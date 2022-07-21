@@ -4,10 +4,17 @@
 {% block body %}
 <h1>Add Order</h1>
 
-<form method="POST" action="">
-    {% csrf_token %}
-    {{form}}
-    <input type="submit" name="submit">
-</form>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-body">
+            <form method="POST" action="">
+                {% csrf_token %}
+                {{form}}
+                <input type="submit" name="submit" class="btn btn-info w-50 ml-5 mt-3" value="Add">
+            </form>
+            
+        </div>
+    </div>
+</div>
 
 {% endblock %}
