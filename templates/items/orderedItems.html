@@ -1,0 +1,70 @@
+{% extends 'home/layout.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/order-style.css' %}" type="text/css">
+<div class="container">
+    <div class="tb-container mb-5" style="margin-top:100px;">
+        <div class="titleCtn extramargin d-flex align-items-center justify-content-between top-heading">
+            <h4>My Ordered Products</h4>
+
+        </div>
+        <div class="order-body titleCtn d-flex align-items-center justify-content-between p-3 flex-wrap">
+            <h4>Order no.
+                <span id="totalOrderPrice">
+                    {{order_id}}
+                </span>
+            </h4>
+
+            <a href="{% url 'myOrder' %}"><button class="btn btn-outline-secondary backCart">←Back to
+                    MyOrder</button></a>
+
+        </div>
+        <div class="table-container">
+
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Product</th>
+                        <th scope="col" class="text-center">Price</th>
+                        <th scope="col" class="text-center">Quantity</th>
+                        <th scope="col">Total</th>
+
+                    </tr>
+                </thead>
+                {% for item in items %}
+                <tbody>
+                    <tr>
+                        <td data-label="">
+                            <div class="img-container text-center">
+                                <a href="/products/productDetail/{{item.product.id}}"> <img class="order-image mb-3"
+                                        src="{{item.product.image.url}}" alt="{{item.product.name}}"> </a>
+                            </div>
+                        </td>
+                        <td data-label="Product">{{item.product.name}}</td>
+                        <td data-label="Price">रु{{item.product.price}}</td>
+                        <td data-label="Quantity">
+                            <div class="qty-counter text-center d-flex justify-content-center align-items-center">
+                                <div class=" cartinput-group cartinput-number-group">
+
+                                    <input class="cartinput-number" type="number" value="{{item.quantity}}" min="0"
+                                        max="1000" readonly>
+
+                                </div>
+
+
+                            </div>
+                        </td>
+                        <td data-label="Total">रु{{item.get_total}}</td>
+                        <!-- <td data-label=""><a style="color: red; cursor:pointer;" class="update-cart" data-product="{{item.product.id}}" data-action="deleteItem">Remove</a></td> -->
+
+
+                    </tr>
+
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

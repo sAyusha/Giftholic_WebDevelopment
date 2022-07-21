@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="{% static 'css/admin/admin-login.css' %}" type="text/css">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="logo">
+        <img src="{% static 'images/logo.png' %}" alt="" width="300px;">
+    </div>
+
+    <div class="title">
+        <p> Online Gift Store - <small class="title-desc"> Admin Panel</small> </p>
+    </div>
+
+    <form action="#" method="POST" class="login100-form validate-form">
+        {% csrf_token %}
+        <div class="heading text-uppercase mb-3">
+            <h5> Sign in to  continue!! </h5>
+        </div>
+
+        <div class="row">
+            <div class="box-element">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="username.." class="form-control">
+            </div>
+            <div class="box-element mt-3">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="password.." class="form-control">
+            </div>
+            <div class="box-element mt-3">
+                <button type="submit" class="btn loginBtn text-white">
+                    Login
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

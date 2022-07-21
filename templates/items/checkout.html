@@ -1,0 +1,195 @@
+{% extends 'home/layout.html' %}
+{% load static %}
+
+{% block title %}
+display cart
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/display-style.css' %}" type="text/css">
+<div class="container checkout-content" style="margin-top:100px;">
+    <div class="row mb-5">
+        <div class="col-lg-6">
+            <div class="box-element" id="form-wrapper">
+                <form action="" id="form">
+                    {% csrf_token %}
+                    <div id="shipping-info">
+                        <h2> Shipping Information </h2>
+                        <hr>
+                        <div class="form-field">
+                            <input required type="text" class="form-control" name="address" placeholder="Address..">
+                        </div>
+                        <div class="form-field">
+                            <input required type="text" class="form-control" name="city" placeholder="City..">
+                        </div>
+                        <div class="form-field">
+                            <input required type="text" class="form-control" name="street" placeholder="Street..">
+                        </div>
+                        <div class="form-field">
+                            <input required type="text" class="form-control" name="wardno" placeholder="Ward No..">
+                        </div>
+                        <div class="form-field">
+                            <input required type="text" class="form-control" name="zipcode" placeholder="Zip Code..">
+                        </div>
+                    </div>
+                    <div id="user-info">
+                        <hr>
+                        <div class="form-field">
+                            <input required type="text" class="form-control" name="name" placeholder="Name..">
+                        </div>
+                        <div class="form-field">
+                            <input required type="email" class="form-control" name="email" placeholder="Email..">
+                        </div>
+                        <hr>
+                    </div>
+                    <input id="form-button" type="submit" class="btn btn-success btn-block" value="Continue">
+                </form>
+            </div>
+            <br>
+            <div class="box-element hidden" id="payment-info">
+                <h5> Payment Options </h5>
+                    <select style="width: 200px;" name="PaymentMethod" id="pm" onchange=getPmValue()>
+                            <option value="Cash on Delivery" name="Cash on Delivery">Cash on Delivery</option>
+                            <option value="Khalti" name="Khalti">Khalti</option>
+                    </select>
+                            
+                    <a href="#payModal" data-toggle="modal" style="text-decoration: none;">
+                        <button id="payment-buttonCOD" class="payBtn d-block w-100 mt-3 p-2" data-pm='COD'>Place Order</button>
+                    </a>
+                     
+            </div>
+            <div id="payModal" class="modal fade" style="margin-top:150px;">
+                <div class="modal-dialog modal-confirm">
+                    <div class="modal-content">
+                        <div class="modal-header flex-column">						
+                            <h6 class="modal-title w-100">Are you sure you want to checkout?</h6>	
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            
+                            <button type="button" class="btn btn-success">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         
+            <div id="payment-box" class="payment-box d-none p-0">
+                <div style="margin-top: 10px;" class="titleCtn d-flex align-items-center justify-content-between">
+                    <h4 style="margin-left: 20px; margin-top: 10px;">Payment</h4><br>
+                    <!-- <button id="payment-button" onclick=KhaltiAPI()>Pay with Khalti</button> -->
+    
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="box-element">
+                <a href="{% url 'cart' %}" class="btn btn-outline-dark">&#x2190; Back to Cart</a>
+                <hr>
+                <h3> Order Summary </h3>
+                <hr>
+                {% for item in items %}
+                <div class="cart-row">
+                    <div style="flex:1;"><img class="check-image" src="{{item.product.imageURL}}" alt=""></div>
+                    <div style="flex:2;"><p>{{item.product.name}}</p></div>
+                    <div style="flex:1;"><p>{{item.product.price}}</p></div>
+                    <div><p>X{{item.quantity}}</p></div>
+                </div>
+                {% endfor %}
+                <h6><strong> Items: {{order.get_cart_items}}</strong></h6>
+                <h6><strong> Total: Rs {{order.get_cart_total}} </strong></h6>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    var shipping = '{{order.shipping}}'
+    var total = '{{order.get_cart_total}}'
+
+    if(shipping == 'False'){
+        document.getElementById('shipping-info').innerHTML = ''
+    }
+
+    if ( user != "AnonymousUser"){
+        document.getElementById('user-info').innerHTML=''
+    }
+
+    if (shipping == 'False' && user != 'AnonymousUser'){
+        // hide enire form if user is logged in and shipping is false
+        document.getElementById('form-wrapper').classList.add('hidden');
+        //show payment if logged in user wants to buy an item that doesnot require shipping
+        document.getElementById('payment-info').classList.remove('hidden');
+    }
+
+    var form = document.getElementById('form')
+    csrftoken = form.getElementsByTagName("input")[0].value
+    console.log('Newtoken:', form.getElementsByTagName("input")[0].value)
+
+    form.addEventListener('submit', function(e){
+        e.preventDefault()
+        console.log('Form Submitted')
+        document.getElementById('form-button').classList.add("hidden");
+        document.getElementById('payment-info').classList.remove("hidden");
+    })
+
+    document.getElementById('make-payment').addEventListener('click',function(e){
+        submitFormData()
+    })
+
+    function submitFormData(){
+        console.log('Payment button clicked')
+
+        var userFormData = {
+            'name':null,
+            'email':null,
+            'total':total,
+        }
+
+        var shippingInfo = {
+            'address':null,
+            'city':null,
+            'street':null,
+            'wardno':null,
+            'zipcode':null,
+        }
+
+        if (shipping != 'False'){
+            shippingInfo.address = form.address.value
+            shippingInfo.city = form.city.value
+            shippingInfo.street = form.street.value
+            shippingInfo.wardno = form.wardno.value
+            shippingInfo.zipcode = form.zipcode.value
+        }
+
+        if (user == 'AnonymousUser'){
+            userFormData.name = form.name.value
+            userFormData.email = form.email.value
+        }
+
+        // var url = '/process_order/'
+        // fetch(url,{
+        //     method: 'POST',
+        //     headers:{
+        //         'Content-Type':'application/json',
+        //         'X-CSRFToken':csrftoken,
+        //     },
+        //     body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo}),
+        // })
+        // .then((response) => response.json())
+        // .then((data) => {
+        //     console.log("Success:", data);
+        //     alert('Transaction Completed');
+
+        //     cart = {}
+        //     document.cookie = 'cart=' + JSON.stringify(cart) + ";domain;path=/"
+
+        //     window.location.href = "{% url 'display' %}"
+        // })
+    }
+
+</script>
+
+{% endblock content %}

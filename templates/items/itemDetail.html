@@ -1,0 +1,92 @@
+{% extends 'home/layout.html' %}
+{% load static %}
+
+{% block title %}
+product name
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/display-style.css' %}" type="text/css">
+<div class="container product-detail mb-5 pb-4" style="margin-top:100px; width: 65% !important;">
+    <div class="box-element prod-content bg-light p-5">
+        <div class="clearfix d-flex">
+            <div class="left-panel m-auto">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <img src="{{products.imageURL}}" class="row-image detail-image" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="right-panel ml-5 w-100">
+                <div class="row">
+                    <div class="item product-det d-flex align-items-center">
+                        <div class="prod-detail d-flex flex-column justify-content-center">
+                            <div class="d-flex justify-content-between">
+                                <h5><strong>{{products.name}}</strong></h5>
+                                <div style="width: 90px;">
+                                    {% if user.is_authenticated %}
+                                        {% if favorite_status %}
+                                            <form style="width: 100%;" action="{% url 'favoritethis' products.id %}" method="POST">
+                                                {% csrf_token %}
+                                                <button name="products.id" value="{{ products.id }}" class="favoriteBtn" type="submit"><img src="{% static 'images/wishlisted.png' %}" title="Added to Wishlist"></button>
+                                            </form>
+                                        {% else %}
+                                            <form style="width: 100%;" action="{% url 'favoritethis' products.id %}" method="POST">
+                                                {% csrf_token %}
+                                                <button name="products.id" value="{{ products.id }}" class="favoriteBtn" type="submit"><img  src="{% static 'images/wishlist.png' %}" title="Add to Wishlist"></button>
+                                            </form>
+                                        {% endif %}
+                    
+                                    {% else %}
+                                        <form style="width: 100%;text-align: center;" action="/accounts/login">
+                                            <button class="favoriteBtn"><img src="{% static 'wishlist.png' %}" alt=""></button>
+                                        </form>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p><strong>Description:</strong></p>
+                        <p>{{products.description}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h5>Rs {{products.price}}</h5>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="ProdAction tp-margin d-flex justify-content-between">
+                            <div class="cartBtn d-flex justify-content-center align-items-center">
+                                {% if user.is_authenticated %}
+                                    {% if products.available == True %}
+                                        <button id="addTocart" data-product="{{products.id}}" data-action="addWithQty" data-qty="1" class="addToCart update-cart">Add to Cart</button>
+            
+                                    {% else %}
+                                        <button class="outOfStock" disabled>Out of Stock</button>
+                                    {% endif %}
+                                {% else %}
+                                    <form style="width: 100%;" action="/accounts/login">
+                                        {% if products.available == True %}
+                                            <button class="addToCart">Add to Cart</button>
+                                        {% else %}
+                                            <button class="outOfStock" disabled>Out of Stock</button>
+                                        {% endif %}                         
+                                    </form>
+                                {% endif %}   
+                            </div>               
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

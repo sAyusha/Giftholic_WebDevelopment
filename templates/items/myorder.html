@@ -1,0 +1,68 @@
+{% extends 'home/layout.html' %}
+{% load static %}
+
+{% block title %}
+Giftholic- my order
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/order-style.css' %}" type="text/css">
+<div class="container">
+    <div class="tb-container mb-5" style="margin-top: 100px;">
+        <div class="titleCtn extramargin d-flex align-items-center justify-content-between top-heading">
+            <h4 class="text-uppercase"><strong> My Order </strong></h4>
+        </div>
+        {% for orders in myorder%}
+        <div class="order-body titleCtn d-flex align-items-center justify-content-between p-3 flex-wrap">
+            <h4>Order no.
+                <span id="totalOrderPrice">
+                {{orders.o_id}}
+               </span></h4>
+    
+                <a href="{% url 'orderedProducts' orders.o_id %}"><button class="btn btn-outline-secondary backCart">View Products→</button></a>
+        
+            </div>
+            
+            <table class="order-table">
+                <thead>
+                  <tr>
+                    <th scope="col" class="first-child">Payment Method</th>
+                    <th scope="col">Ordered Date</th>
+                    <th scope="col">Delivery Date</th>
+                    <th scope="col">Delivery Status</th>
+                    <th scope="col">Payment</th>
+                    <th scope="col">Total</th>
+                  </tr>
+                </thead>
+            <tbody>
+              <tr>
+                <td class="first-child" data-label="Payment Method">{{orders.o_id.payment_method}}</td>
+                <td data-label="Ordered Date">{{orders.address.date_added.date}}</td>
+                <td data-label="Delivery Date">{{orders.delivery.deliveryDate.date}}</td>
+                <td data-label="Delivery Status">
+                    {% if orders.delivery.delivered == True %}
+                    <h6 class="confirmation">Delivered</h6>
+                    {% else %}
+                    <h6 class="confirmation text-danger">Not Delivered</h6>
+                    {% endif %}
+                </td>
+                <td data-label="Payment">
+                    {% if orders.o_id.paid == True %}
+                    <h6 class="confirmation">Paid</h6>
+                    {% else %}
+                    <h6 class="confirmation text-danger">Unpaid</h6>
+                    {% endif %}
+                </td>
+                <td data-label="Total">रु{{orders.o_id.get_cart_total}}</td>
+                <!-- <td data-label=""><a style="color: red; cursor:pointer;" class="update-cart" data-product="{{item.product.id}}" data-action="deleteItem">Remove</a></td> -->
+    
+                
+              </tr>
+              
+            </tbody>
+        </table>
+           {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

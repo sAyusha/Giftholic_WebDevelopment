@@ -1,0 +1,51 @@
+{% extends 'home/layout.html' %}
+{% load static %}
+{% block title %}
+Cart
+{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/display-style.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/order-style.css' %}" type="text/css">
+<div class="container">
+  <div class="tb-container bg-light mb-5 m-auto pb-2" style="margin-top: 100px !important;">
+    <div class="titleCtn extramargin d-flex align-items-center justify-content-between top-heading text-uppercase">
+        <h4>Wishlist ( {{countWishlist}} )</h4>
+    </div>
+
+    <table class="favtable">
+        <thead class="mb-4">
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col"></th>
+
+          </tr>
+        </thead>
+        {% for item in wishList%}
+        <tbody>
+          <tr>
+            <td data-label="">
+                <div class="img-container m-auto">
+                           <a href="{% url 'detail' item.id %}"> <img class="pt-2" src="{{item.image.url}}" alt="{{item.name}}" width="200px"> </a> 
+                </div>
+            </td>
+            <td data-label="Product">{{item.name}}</td>
+            <td data-label="Price">Rs. {{item.price}}</td>
+            <td data-label="">
+                <form style="width: 120%;" class="viewFavoriteBtn" action="{% url 'detail' item.id %}">
+                    {% csrf_token %}
+                    <button class="favoriteBtn text-primary bg-light" type="submit">View Product</button>
+                </form>
+                <form style="width: 100%;" action="{% url 'favoritethis' item.id %}" method="POST">
+                    {% csrf_token %}
+                    <button name="products.id" value="{{ item.id }}" class="favoriteBtn text-danger bg-light pl-5" type="submit">Remove</button>
+                </form>
+            </td>
+          </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,98 @@
+{% extends 'home/layout.html' %}
+{% load static %}
+
+{% block title %}
+Giftholic - contact
+{% endblock %}
+
+{% block content %}
+<style>
+    .alert {
+        position: relative;
+        height: 25px;
+        padding: 0px !important;
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0px);
+        transition: visibility 0s, opacity 250ms, transform 250ms;
+    }
+
+    .alert.hide {
+        position: relative;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-10px);
+        /*translateX, translateY, translateZ works well */
+        transition: visibility 0s 250ms, opacity 250ms, transform 250ms;
+    }
+</style>
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/contact-style.css' %}">
+
+<div class="contact-page">
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="contact-heading d-flex justify-content-center align-items-center">
+                <i class="fa fa-phone mr-3"></i>
+                <h3 class="mt-2"> Add Contact Information </h3>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <form action="#" method="POST">
+                {% csrf_token %}
+                <div class="form-group mb-4">
+                    <label for="fullname">
+                        <h5> Your Name </h5>
+                    </label>
+                    <input type="text" placeholder="Enter your name..." class="form-control form-control-lg mt-1"
+                        id="fullname" name="fullname">
+                </div>
+                <div class="form-group mb-4">
+                    <label for="email">
+                        <h5> Your Email Address </h5>
+                    </label>
+                    <input type="email" placeholder="Enter your email..." class="form-control form-control-lg mt-1"
+                        id="email" name="email">
+                </div>
+                <div class="form-group mb-4">
+                    <label for="subject">
+                        <h5> Subject </h5>
+                    </label>
+                    <input type="text" placeholder="Subject..." class="form-control form-control-lg mt-1" id="subject"
+                        name="subject">
+                </div>
+                <div class="form-group mb-4">
+                    <label for="message">
+                        <h5> Your Query </h5>
+                    </label>
+                    <textarea name="message" id="message" rows="5" placeholder="Write your queries..."
+                        class="form-control form-control-lg mt-1"></textarea>
+                </div>
+                <div class="form-group mb-4">
+                    <button class="btn btn-outline-info"> Send Query </button>
+                </div>
+                {% for message in messages %}
+                <div class="error-msg alert">
+                    <p class="text-center text-white bg-dark ml-4 p-1" id="messages">{{ message }}</p>
+                </div>
+                {% endfor %}
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script>
+    var m = document.getElementsByClassName("alert");
+
+    setTimeout(function () {
+        if (m && m.length) {
+            m[0].classList.add('hide');
+        }
+    }, 5000);
+</script>
+
+{% endblock content %}

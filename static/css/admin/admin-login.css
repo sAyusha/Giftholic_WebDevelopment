@@ -1,0 +1,33 @@
+body{
+    background-color: beige;
+}
+
+.container{
+    background-color: white;
+    width: 35%;
+    height: 420px;
+    margin-top: 100px;
+    border-radius: 8px;
+    padding: 30px;
+}
+
+.boxelement{
+    margin-left: 100px;
+}
+
+.title-desc{
+    /* font-size: 14px; */
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.loginBtn{
+    width: 100px;
+    padding: 5px;
+    border-radius: 8px;
+    border: 0;
+    background-color: #ca92f0;
+    font-size: 14px;
+    font-weight: 700;
+}
+

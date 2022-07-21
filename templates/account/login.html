@@ -1,0 +1,115 @@
+{% extends 'home/layout.html' %}
+{% load static %}
+
+{% block title %}
+Giftholic- login
+{% endblock %}
+
+{% block content %}
+<style>
+    .alert {
+    position: relative;
+    height: 25px;
+    padding: 0px !important;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0px);
+    transition: visibility 0s, opacity 250ms, transform 250ms;
+    }
+
+    .alert.hide {
+        position: relative;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-10px);  /*translateX, translateY, translateZ works well */
+        transition: visibility 0s 250ms, opacity 250ms, transform 250ms;
+    }
+</style>
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/login-style.css' %}">
+
+<div class="container-1 mt-5">
+    <div class="form-container">
+        <div class="login-container">
+            <div class="row">
+                <center class="mt-4">
+                    <img src="{% static 'images/loginimg/user-profile.svg' %}" alt="user" width="80px;">
+
+                    <h3 class="heading"> Login Here </h3>
+                </center>
+            </div>
+            <div class="row">
+                <form action="#" class="login-form" method="post">
+                    {% csrf_token %}
+
+                    <div class="input-field form-input">
+                        <i class="fa fa-user"></i>
+                        <input type="text" placeholder="Username" name="username" id="username">
+                    </div>
+
+                    <div class="input-field form-input">
+                        <i class="fa fa-lock"></i>
+                        <input type="password" class="input-psswd" placeholder="Password" name="password" id="password">
+                        <i class="toggle-password fa fa-fw fa-eye-slash"></i>
+                    </div>
+
+                    <div class="pass-field">
+                        Forgot Password?
+                    </div>
+
+                    <div class="login-btn mb-3">
+                        <button type="submit">Log In</button>
+                    </div>
+                </form>
+            </div>
+
+            {% for message in messages %}
+            <div class="error-msg alert">
+                <p class="text-center text-white bg-dark ml-4 p-1" id="messages">{{ message }}</p>
+            </div>
+            {% endfor %}
+
+            <div class="row social-platform">
+                <h2 class="heading-two"><span class="optional">OR</span></h2>
+
+                <div class="social-media">
+                    <a href="#" class="social-icon">
+                        <img src="{% static 'images/loginimg/google.png' %}" alt="google">
+                        <p>Sign in with google</p>
+                    </a>
+                </div>
+
+                <div class="create-acc-field create">
+                    <p>Don't have an account?</p>
+                    <a href="{% url 'register' %}" class="register">Sign Up</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-container">
+            <div class="panel">
+                <img src="{% static 'images/loginimg/login.svg' %}" alt="login" class="image">
+                <div class="content">
+                    <h1>Hello, Welcome Back</h1>
+                    <p>
+                        To keep connected with us, please <br> login with your personal <br>
+                        information.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    var m = document.getElementsByClassName("alert");  
+
+    setTimeout(function () {
+        if (m && m.length) {
+            m[0].classList.add('hide');
+        }
+    }, 5000);
+</script>
+
+{% endblock content %}

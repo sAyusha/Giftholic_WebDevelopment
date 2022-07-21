@@ -1,0 +1,101 @@
+{% extends 'home/layout.html' %}
+{% load static %}
+
+{% block title %}
+Giftholic- register
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/login-style.css' %}">
+
+<div class="container-2 mt-5">
+    <div class="form-container">
+        <div class="signup-container">
+            <div class="row">
+                <center class="mt-4">
+                    <img src="{% static 'images/loginimg/profile-register.svg' %}" alt="user" width="100px">
+                    <h3 class="heading"> Create an Account </h3>
+                </center>
+            </div>
+            <div class="row">
+                <form action="#" class="signup-form mt-2" method="POST">
+                    {% csrf_token %}
+    
+                    <div class="input-field form-group">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="fa fa-user"></i>
+                            </span>
+                        </div>
+                        {{form.username}}
+                    </div>
+                    <div class="input-field form-group">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                        </div>
+                        {{ form.email }}
+                    </div>
+                    <div class="input-field form-group">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="fa fa-lock"></i>
+                            </span>
+                        </div>
+                        {{ form.password1 }}
+                        <i class="toggle-password eye-icon fa fa-fw fa-eye-slash"></i>
+                    </div>
+                    <div class="input-field form-group">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="fa fa-unlock"></i>
+                            </span>
+                        </div>
+                        {{ form.password2 }}
+                        <i class="toggle-password eye-icon fa fa-fw fa-eye-slash"></i>
+                    </div>
+                    <div class="signup-btn form-group mt-3 mb-2">
+                        <button class="btn btn-secondary" type="submit"> Sign Up</button>
+                    </div>
+                </form>
+            </div>
+
+            {{ form.errors }}
+
+            <div class="row">
+                <div class="create-acc-field form-group">
+                    <p> Already have an account? </p>
+                    <a href="{% url 'login' %}" class="login">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-container">
+        <div class="panel">
+            <img src="{% static 'images/loginimg/register.svg' %}" alt="register" class="image">
+            <div class="content">
+                <h1> Member of Giftholic? </h1>
+                <p>
+                    To keep connected with us, <br>
+                    please signin with your personal information.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Query All input fields
+    var form_fields = document.getElementsByTagName('input')
+    form_fields[2].placeholder = 'Username..';
+    form_fields[3].placeholder = 'Email..';
+    form_fields[4].placeholder = 'Password..';
+    form_fields[5].placeholder = 'Confirm Password..';
+
+    for (var field in form_fields){
+        form_fields[field].className += 'form-control'
+    }
+</script>
+{% endblock content %}

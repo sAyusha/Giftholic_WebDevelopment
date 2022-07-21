@@ -1,0 +1,67 @@
+#category_ctn,
+#pullOut{
+    margin-top: auto !important;
+}
+
+.tb-container{
+    border: 1px solid #ccc;
+}
+
+.top-heading{
+    background-color: #F5F5DC;
+    padding: 10px 50px;
+    border-bottom: 1px solid #ccc;
+}
+
+.order-body{
+    height: auto;
+    background-color: rgb(243, 242, 242) !important;
+    padding: 10px 50px !important;
+}
+
+.order-body h4{
+    font-size: 16px;
+    text-transform: none;
+}
+
+#totalOrderPrice{
+    color: #1EA43A; 
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+.confirmation{
+    display: inline; 
+    color: rgb(8, 138, 30); 
+    font-size: 13px;
+}
+
+.order-table{
+    width: 100%;
+    background-color: rgb(243, 242, 242) !important;
+    line-height: 3;
+}
+
+.first-child{
+    padding-left: 50px;
+}
+
+.order-image{
+    width: 200px;
+}
+
+.cartinput-number{
+    width: 30%;
+    height: 35px;
+    padding-left: 10px;
+}
+
+@media only screen and (max-width: 665px){
+    .img-container img{
+        width: 100px !important;
+    }
+
+    table td .viewFavoriteBtn{
+        width: 100% !important;
+    }
+}

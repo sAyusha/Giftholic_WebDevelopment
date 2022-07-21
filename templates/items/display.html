@@ -1,0 +1,70 @@
+{% extends 'home/layout.html' %}
+{% load static %}
+
+{% block title %}
+product display
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/display-style.css' %}" type="text/css">
+<div class="container product-display">
+    <div class="top-heading" style="margin-top: 100px;">
+        <h2 class="text-center text-uppercase"> All Gifts & Hampers </h2>
+    </div>
+
+    <div class="product-details">
+        <div class="row mb-5">
+            {% for product in products %}
+            <div class="col-lg-4 mt-3">
+                <img class="thumbnail" src="{{product.imageURL}}" alt="">
+                <div class="box-element product-content">
+                    <h6> <strong> {{product.name}} </strong></h6>
+                    <hr>
+                    <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">
+                        Add to Cart
+                    </button>
+                    <a class="btn btn-outline-success" href="/products/detail/{{product.id}}?product={{product.name}}">View</a>
+                    <h4 style="display: block; float: right;">Rs {{product.price}}</h4>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <nav aria-label="...">
+        <ul class="pagination d-flex justify-content-center align-items-center mb-5">
+            {% if products.has_previous %}
+            <li class="page-item">
+                <a href="?page={{ products.previous_page_number }}" class="page-link">Previous</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a href="#" tabindex="-1" aria-disabled="true" class="page-link">Previous</a>
+            </li>
+            {% endif %}
+
+            {% for i in products.paginator.page_range %}
+                {% if i == products.number %}
+                    <li class="page-item active">
+                        <a class="page-link">{{i}}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a href="?page={{i}}" class="page-link">{{i}}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if products.has_next %}
+            <li class="page-item">
+                <a href="?page={{ products.next_page_number }}" class="page-link">Next</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a href="#" tabindex="-1" aria-disabled="true" class="page-link">Next</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock content%}

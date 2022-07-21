@@ -1,0 +1,18 @@
+.contact-page{
+    margin-top: 100px !important;
+    margin-left: 65px;
+    width: 90%;
+}
+
+.category_ctn,
+.pullOut{
+    display: none;
+}
+
+/* responsive */
+@media only screen and (max-width: 992px){
+    .contact-page{
+        width: 100% !important;
+        margin-left: auto !important ;
+    }
+}

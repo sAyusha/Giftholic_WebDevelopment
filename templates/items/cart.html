@@ -1,0 +1,80 @@
+{% extends 'home/layout.html' %}
+{% load static %}
+
+{% block title %}
+display cart
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/display-style.css' %}" type="text/css">
+<div class="container cart-content" style="margin-top:100px;">
+    <div class="row mb-5">
+        <div class="col-lg-12">
+            <div class="box-element">
+                <a class="btn btn-outline-dark" href="{% url 'index' %}">&#x2190; Continue Shopping</a>
+                <br>
+                <br>
+                <table class="table">
+                    <tr>
+                        <th><h5>Items: <strong>{{ order.get_cart_items }}</strong></h5></th>
+                        <th><h5>Total: <strong> Rs. {{ order.get_cart_total }}</strong></h5></th>
+                        <th>
+                            <a style="float: right; margin:5px;" href="{% url 'checkout' %}" class="btn btn-success">Checkout</a>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+            <br>
+            <div class="box-element">
+                <div class="cart-row">
+                    <div style="flex:2;"></div>
+                    <div style="flex:2;"><strong>Item</strong></div>
+                    <div style="flex:1;"><strong>Price</strong></div>
+                    <div style="flex:1;"><strong>Quantity</strong></div>
+                    <div style="flex:1;"><strong>Total</strong></div>
+                    <div style="flex:1"></div>
+                </div>
+
+                {% for item in items %}
+                <div class="cart-row">
+                    <div style="flex:2;">
+                        <img class="row-image" src="{{item.product.imageURL}}" alt="{{item.product.name}}">
+                    </div>
+                    <div style="flex:2;">{{item.product.name}}</div>
+                    <div style="flex:1;">Rs {{item.product.price}}</div>
+                    <div style="flex:1;">
+                        <p class="quantity">{{item.quantity}}</p>
+                        <div class="quantity">
+                            <i data-product="{{item.product.id}}" data-action="add" class="fa fa-caret-up chg-quantity update-cart"></i>
+                            <i data-product="{{item.product.id}}" data-action="remove" class="fa fa-caret-down chg-quantity update-cart"></i>
+                        </div>
+                    </div>
+                    <div style="flex:1;">Rs {{item.get_total}}</div>
+                    <div style="flex:1;">
+                        <a href="#myModal" class="remove-btn text-danger" data-toggle="modal">Remove</a>
+                        <!-- <a style="color: red; cursor:pointer;" class="update-cart" data-product="{{item.product.id}}" data-action="remove">Remove
+                        </a> -->
+                    </div>
+                </div>
+
+                <div id="myModal" class="modal fade" style="margin-top:150px;">
+                    <div class="modal-dialog modal-confirm">
+                        <div class="modal-content">
+                            <div class="modal-header flex-column">						
+                                <h6 class="modal-title w-100">Are you sure you want to remove your cart items?</h6>	
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                
+                                <button type="button" class="btn btn-danger update-cart" data-product="{{ item.product.id }}" data-action="deleteItem">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>  
+        </div>
+    </div>
+</div>
+{% endblock content %}

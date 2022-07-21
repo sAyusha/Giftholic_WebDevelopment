@@ -1,0 +1,67 @@
+{% extends 'home/layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/display-style.css' %}" type="text/css">
+<style>
+    .alert {
+    position: relative;
+    height: 25px;
+    padding: 0px !important;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0px);
+    transition: visibility 0s, opacity 250ms, transform 250ms;
+    }
+
+    .alert.hide {
+        position: relative;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-10px);  /*translateX, translateY, translateZ works well */
+        transition: visibility 0s 250ms, opacity 250ms, transform 250ms;
+    }
+</style>
+<div class="container">
+
+    <div class="content-section bg-light p-3 mb-5" style="margin-top:100px;">
+        <div class="media d-flex mb-3">
+            <img src="{{ user.profile.image.url }}" alt="" class="rounded-circle account-img ml-3">
+            <div class="media-body pl-5 pt-5">
+                <h2 class="account-heading">{{user.username}}</h2>
+                <p class="text-secondary">{{user.email}}</p>
+            </div>
+        </div>
+
+        <form action="#" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group" style="line-height: 2;">
+                <legend class="border-bottom mb-4">My Profile</legend>
+                {{ u_form|crispy }}
+                <br>
+                {{ p_form|crispy }}
+            </fieldset>
+            <br>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Update</button>
+            </div>
+        </form>
+
+        {% for message in messages %}
+            <div class="error-msg alert">
+                <p class="text-center text-white bg-success ml-4 p-1" id="messages">{{ message }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    var m = document.getElementsByClassName("alert");  
+
+    setTimeout(function () {
+        if (m && m.length) {
+            m[0].classList.add('hide');
+        }
+    }, 5000);
+</script>
+{% endblock content %}

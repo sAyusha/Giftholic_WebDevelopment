@@ -1,0 +1,15 @@
+{% extends 'admin/adminPanel.html' %}
+{% load static %}
+
+{% block body %}
+<p> Are you sure you want to delete "{{item}}" ?</p>
+
+<form method="POST" action="{% url 'delete_order' item.id %}">
+    {% csrf_token %}
+    
+    <a href="{% url 'admindashboard' %}"> Cancel </a>
+
+    <input type="submit" name="Confirm">
+</form>
+
+{% endblock %}
