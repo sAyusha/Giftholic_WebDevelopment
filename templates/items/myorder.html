@@ -13,7 +13,7 @@ Giftholic- my order
             <h4 class="text-uppercase"><strong> My Order </strong></h4>
         </div>
         {% for orders in myorder%}
-        <div class="order-body titleCtn d-flex align-items-center justify-content-between p-3 flex-wrap">
+        <div class="order-body titleCtn d-flex align-items-center justify-content-between p-3 flex-wrap mt-4">
             <h4>Order no.
                 <span id="totalOrderPrice">
                 {{orders.o_id}}
@@ -53,7 +53,7 @@ Giftholic- my order
                     <h6 class="confirmation text-danger">Unpaid</h6>
                     {% endif %}
                 </td>
-                <td data-label="Total">रु{{orders.o_id.get_cart_total}}</td>
+                <td data-label="Total">Rs.{{orders.o_id.get_cart_total}}</td>
                 <!-- <td data-label=""><a style="color: red; cursor:pointer;" class="update-cart" data-product="{{item.product.id}}" data-action="deleteItem">Remove</a></td> -->
     
                 

@@ -34,9 +34,9 @@ urlpatterns = [
     path('myorder/', include('myorder.urls')),
     path('update_item/', cartView.updateItem, name="update_item"),
     path('searchResult',productView.searchResult,name="searched"),
-    path('paymentsuccess/<int:orderID>/<int:pm>',checkoutView.paymentSuccess,name="paymentsuccess"),
     # path("process_order/", checkoutView.processOrder, name="process_order"),
     path('favoritethis/<int:p_id>', productView.favoritethis,name="favoritethis"),
+     path('paymentsuccess/<int:orderID>/<int:pm>',checkoutView.paymentSuccess,name="paymentsuccess"),
     path('admin-panel/', include('adminPanel.urls')),
 ]
 

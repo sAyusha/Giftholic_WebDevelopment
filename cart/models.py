@@ -53,7 +53,7 @@ class Order(models.Model):
         return total
 
     def __str__(self):
-        return self.product.name
+        return str(self.id)
 
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)

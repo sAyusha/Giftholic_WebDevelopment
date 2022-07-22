@@ -65,3 +65,17 @@ function updateUserOrder(productId, action){
         location.reload()
     })
 }
+
+function validateForCheckout(){
+
+    let price = document.getElementById("totalOrderPrice").innerText;
+
+    if (price == "Rs0"){
+        if ($('#msgChk').hasClass('hide')){
+            $('#msgChk').removeClass('hide')
+        }
+    }
+    else{
+        location.href="/checkout/"
+    }
+}

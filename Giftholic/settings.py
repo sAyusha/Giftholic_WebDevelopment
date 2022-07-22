@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'myorder.apps.MyorderConfig',
     'adminPanel.apps.AdminpanelConfig',
     'crispy_forms',
+    'jquery',
+    'widget_tweaks',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'

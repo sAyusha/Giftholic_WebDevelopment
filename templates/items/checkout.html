@@ -11,7 +11,7 @@ display cart
     <div class="row mb-5">
         <div class="col-lg-6">
             <div class="box-element" id="form-wrapper">
-                <form action="" id="form">
+                <form action="javascript:void(0);" id="form" name="Form">
                     {% csrf_token %}
                     <div id="shipping-info">
                         <h2> Shipping Information </h2>
@@ -42,44 +42,18 @@ display cart
                         </div>
                         <hr>
                     </div>
-                    <input id="form-button" type="submit" class="btn btn-success btn-block" value="Continue">
+                    <!-- <input id="form-button" type="submit" class="btn btn-success btn-block" value="Continue"> -->
+                    <br>
+                    
+                        <h6>Payment Method</h6>
+                        <select style="width: 200px;" name="PaymentMethod" id="pm">
+                                <option value="Cash on Delivery" name="Cash on Delivery">Cash on Delivery</option>
+                                <option value="Khalti" name="Khalti">Khalti</option>
+                        </select>
+                            
+                        <button id="make-payment" class="payBtn btn btn-block mt-3" data-pm='COD'>Place Order</button>
+                   
                 </form>
-            </div>
-            <br>
-            <div class="box-element hidden" id="payment-info">
-                <h5> Payment Options </h5>
-                    <select style="width: 200px;" name="PaymentMethod" id="pm" onchange=getPmValue()>
-                            <option value="Cash on Delivery" name="Cash on Delivery">Cash on Delivery</option>
-                            <option value="Khalti" name="Khalti">Khalti</option>
-                    </select>
-                            
-                    <a href="#payModal" data-toggle="modal" style="text-decoration: none;">
-                        <button id="payment-buttonCOD" class="payBtn d-block w-100 mt-3 p-2" data-pm='COD'>Place Order</button>
-                    </a>
-                     
-            </div>
-            <div id="payModal" class="modal fade" style="margin-top:150px;">
-                <div class="modal-dialog modal-confirm">
-                    <div class="modal-content">
-                        <div class="modal-header flex-column">						
-                            <h6 class="modal-title w-100">Are you sure you want to checkout?</h6>	
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        </div>
-                        <div class="modal-footer justify-content-center">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            
-                            <button type="button" class="btn btn-success">Remove</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-         
-            <div id="payment-box" class="payment-box d-none p-0">
-                <div style="margin-top: 10px;" class="titleCtn d-flex align-items-center justify-content-between">
-                    <h4 style="margin-left: 20px; margin-top: 10px;">Payment</h4><br>
-                    <!-- <button id="payment-button" onclick=KhaltiAPI()>Pay with Khalti</button> -->
-    
-                </div>
             </div>
         </div>
 
@@ -92,9 +66,15 @@ display cart
                 {% for item in items %}
                 <div class="cart-row">
                     <div style="flex:1;"><img class="check-image" src="{{item.product.imageURL}}" alt=""></div>
-                    <div style="flex:2;"><p>{{item.product.name}}</p></div>
-                    <div style="flex:1;"><p>{{item.product.price}}</p></div>
-                    <div><p>X{{item.quantity}}</p></div>
+                    <div style="flex:2;">
+                        <p>{{item.product.name}}</p>
+                    </div>
+                    <div style="flex:1;">
+                        <p>{{item.product.price}}</p>
+                    </div>
+                    <div>
+                        <p>X{{item.quantity}}</p>
+                    </div>
                 </div>
                 {% endfor %}
                 <h6><strong> Items: {{order.get_cart_items}}</strong></h6>
@@ -103,93 +83,66 @@ display cart
         </div>
 
     </div>
+    <div id="msgChk" class="msg-box d-none alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Hey!</strong> Please complete the shipping information.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
     var shipping = '{{order.shipping}}'
     var total = '{{order.get_cart_total}}'
 
-    if(shipping == 'False'){
-        document.getElementById('shipping-info').innerHTML = ''
-    }
-
-    if ( user != "AnonymousUser"){
-        document.getElementById('user-info').innerHTML=''
-    }
-
-    if (shipping == 'False' && user != 'AnonymousUser'){
-        // hide enire form if user is logged in and shipping is false
-        document.getElementById('form-wrapper').classList.add('hidden');
-        //show payment if logged in user wants to buy an item that doesnot require shipping
-        document.getElementById('payment-info').classList.remove('hidden');
-    }
-
-    var form = document.getElementById('form')
-    csrftoken = form.getElementsByTagName("input")[0].value
-    console.log('Newtoken:', form.getElementsByTagName("input")[0].value)
-
-    form.addEventListener('submit', function(e){
-        e.preventDefault()
-        console.log('Form Submitted')
-        document.getElementById('form-button').classList.add("hidden");
-        document.getElementById('payment-info').classList.remove("hidden");
+    var paymentCOD = document.getElementById('make-payment')
+    paymentCOD.addEventListener('click', function(){
+        saveShippingInfo("COD")
     })
 
-    document.getElementById('make-payment').addEventListener('click',function(e){
-        submitFormData()
-    })
+    function saveShippingInfo(pm){
+        var order = {{order}};
+        var email = document.forms["Form"]["email"].value;
+        var address = document.forms["Form"]["address"].value;
+        var city = document.forms["Form"]["city"].value;
+        var street = document.forms["Form"]["street"].value;
+        var wardno = document.forms["Form"]["wardno"].value;
+        var zipcode = document.forms["Form"]["zipcode"].value;
+   
+        var pm = pm;
+        var orderID = {{order.id}};
 
-    function submitFormData(){
-        console.log('Payment button clicked')
-
-        var userFormData = {
-            'name':null,
-            'email':null,
-            'total':total,
+        if (email == "" || address == "" || city == "" || street == "" || wardno == "" || zipcode == "") {
+            console.log("false")
+            document.getElementById('msgChk').classList.remove('d-none')
         }
-
-        var shippingInfo = {
-            'address':null,
-            'city':null,
-            'street':null,
-            'wardno':null,
-            'zipcode':null,
+        else{
+            $.ajax(
+                {
+                    type:'get',
+                    url:'saveShipping',
+                    data:{
+                        order: order,
+                        email:email,
+                        address:address, 
+                        city:city,
+                        street:street, 
+                        wardno:wardno, 
+                        zipcode:zipcode,
+                        pm:pm
+                    },
+                    success:function(){
+                        console.log("Checkout Success")
+                        if (pm == "COD"){
+                            location.href="/paymentsuccess/"+orderID+"/"+0
+                        }
+                        // alert("Data sent for saving")
+                    }
+                }
+            )
         }
-
-        if (shipping != 'False'){
-            shippingInfo.address = form.address.value
-            shippingInfo.city = form.city.value
-            shippingInfo.street = form.street.value
-            shippingInfo.wardno = form.wardno.value
-            shippingInfo.zipcode = form.zipcode.value
-        }
-
-        if (user == 'AnonymousUser'){
-            userFormData.name = form.name.value
-            userFormData.email = form.email.value
-        }
-
-        // var url = '/process_order/'
-        // fetch(url,{
-        //     method: 'POST',
-        //     headers:{
-        //         'Content-Type':'application/json',
-        //         'X-CSRFToken':csrftoken,
-        //     },
-        //     body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo}),
-        // })
-        // .then((response) => response.json())
-        // .then((data) => {
-        //     console.log("Success:", data);
-        //     alert('Transaction Completed');
-
-        //     cart = {}
-        //     document.cookie = 'cart=' + JSON.stringify(cart) + ";domain;path=/"
-
-        //     window.location.href = "{% url 'display' %}"
-        // })
     }
-
 </script>
 
 {% endblock content %}

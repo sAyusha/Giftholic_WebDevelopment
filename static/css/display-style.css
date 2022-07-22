@@ -115,6 +115,7 @@
     border: none;
     border-radius: 8px;
     background: #caa3f9;
+    display: block;
 }
 
 .modal-confirm {		
@@ -167,6 +168,8 @@
 .modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
 	background: #ee3535;
 }
+
+
 
 @media only screen and (max-width: 445px){
     .media-body{

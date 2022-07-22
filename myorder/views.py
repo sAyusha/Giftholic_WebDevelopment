@@ -44,6 +44,7 @@ def myOrder(request):
     context={
         'allcategory':allcategory,
         'cartItems':cartItems,
+        'customer':customer,
         'myorder':myorder, 
     }
     return render(request,'items/myorder.html',context)

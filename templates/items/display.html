@@ -20,9 +20,13 @@ product display
                 <div class="box-element product-content">
                     <h6> <strong> {{product.name}} </strong></h6>
                     <hr>
+                    {% if user.is_authenticated %}
                     <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">
                         Add to Cart
                     </button>
+                    {% else %}
+                    <button class="btn btn-outline-secondary add-btn disabled"> Add to Cart </button>
+                    {% endif %}
                     <a class="btn btn-outline-success" href="/products/detail/{{product.id}}?product={{product.name}}">View</a>
                     <h4 style="display: block; float: right;">Rs {{product.price}}</h4>
                 </div>

@@ -14,7 +14,6 @@ from product.models import *
 from product.utils import cookieCart, cartData, guestOrder
 
 # Create your views here.
-@login_required
 def cartPage(request):
     allcategory = Category.objects.all()
 
@@ -22,6 +21,7 @@ def cartPage(request):
     cartItems = data['cartItems']
     order = data['order']
     items = data['items']
+    
 
     context={
         'allcategory':allcategory,
@@ -31,7 +31,6 @@ def cartPage(request):
     }
     return render(request,'items/cart.html',context)
 
-@login_required
 def updateItem(request):
     data = json.loads(request.body)
     productId = data['productId']

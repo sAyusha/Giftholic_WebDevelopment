@@ -5,5 +5,5 @@ from checkout import views
 
 urlpatterns = [
     path("", views.checkoutPage, name="checkout"),
-    path("saveShipping", views.saveShippingData, name="saveShipping"),
+    path('saveShipping',views.saveShippingData,name="saveShipping"),
 ]

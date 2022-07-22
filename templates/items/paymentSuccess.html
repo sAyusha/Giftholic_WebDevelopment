@@ -1,4 +1,4 @@
-{% extends 'home/layout.html %}
+{% extends 'home/layout.html' %}
 {% load static %}
 {% block title %}
 payment-success
@@ -9,27 +9,23 @@ payment-success
     <div class="main-ctn">
         <div class="card">
             <div style="border-radius:200px; height:200px; width:200px; background: #62C911; margin:0 auto;">
-                <i class="checkmark">✓</i>
+                <i class="fa fa-check"></i>
             </div>
             <h1>Order Success</h1>
             <div class="orderIDctn">
-                <h3>ORDER #:{{getOrder}}</h3>
+                <h3 class="pt-2">ORDER #:{{getOrder}}</h3>
             </div>
             <div class="PmCtn">
                 {% if pm == 0 %}
-                <h3>Payment Method : Khalti</h3>
-                {% elif pm == 1 %}
-                <h3>Payment Method : Cash on delivery</h3>
+                <h3 class="pt-1">Payment Options : Cash on delivery</h3>
                 {% endif %}
             </div>
 
             {% if pm == 0 %}
-            <p>Thank you for your payment of रु{{getOrder.get_cart_total}}.<br />Please check your email for further
+            <p>Thank you for your payment of Rs{{getOrder.get_cart_total}}.<br />Please check your email for further
                 details</p>
-            {% elif pm == 1 %}
-            <p>Your order has been received.<br />Please check your email for further details</p>
             {% endif %}
-            <a href="{% url 'home/index' %}">
+            <a href="{% url 'index' %}">
                 Back to Home
             </a>
 
