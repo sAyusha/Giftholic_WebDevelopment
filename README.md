@@ -16,7 +16,7 @@ Python DJANGO, MySQL Database, as the back-end. The system was carefully designe
 * Keeping the order records in the admin-panel.
 
 ## Tools used in the project.
-* [Visual Studio Code](https:https://code.visualstudio.com/) for developing code in Java.
+* [Visual Studio Code](https:https://code.visualstudio.com/) for developing code.
 * [MySQL Workbench](https://www.mysql.com/products/workbench/) 
 
 ## Ayusha Shrestha
