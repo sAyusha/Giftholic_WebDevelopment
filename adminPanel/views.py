@@ -14,7 +14,7 @@ from django.contrib import messages
 from cart.models import Order
 from product.forms import categoryForm, productForm
 
-from product.models import Category, Customer, Product
+from product.models import Category, Product
 from .forms import OrderForm
 
 
@@ -48,7 +48,7 @@ def adminpanelLogin(request):
 @login_required(login_url='adminpanelLogin')
 def adminHome(request):
     order = Order.objects.all()
-    customer = Customer.objects.all()
+    customer = User.objects.all()
 
     total_customer = customer.count()
 

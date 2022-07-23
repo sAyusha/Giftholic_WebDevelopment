@@ -1,0 +1,139 @@
+.cart-row {
+  display: flex;
+  align-items: flex-stretch;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ececec;
+}
+
+.row-image {
+  width: 200px;
+  height: 200px;
+}
+
+.quantity {
+  display: inline-block;
+  font-weight: 700;
+  padding-right: 10px;
+}
+
+.chg-quantity {
+  width: 12px;
+  cursor: pointer;
+  display: block;
+}
+
+#myModal {
+  margin-top: 150px;
+}
+
+.modal-confirm {
+  color: #636363;
+  width: 400px;
+}
+
+.modal-confirm .modal-content {
+  padding: 20px;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+  font-size: 14px;
+}
+
+.modal-confirm .modal-header {
+  border-bottom: none;
+  position: relative;
+}
+
+.modal-confirm h4 {
+  text-align: center;
+  font-size: 26px;
+  margin: 30px 0 -10px;
+}
+
+.modal-confirm .close {
+  position: absolute;
+  top: -5px;
+  right: -2px;
+}
+
+.modal-confirm .modal-body,
+.modal-confirm .modal-footer a {
+  color: #999;
+}
+
+.modal-confirm .modal-footer {
+  border: none;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 13px;
+  padding: 10px 15px 25px;
+}
+
+.modal-confirm .btn-secondary:hover,
+.modal-confirm .btn-secondary:focus {
+  background: #a8a8a8;
+}
+
+.modal-confirm .btn-danger:hover,
+.modal-confirm .btn-danger:focus {
+  background: #ee3535;
+}
+
+.fade.show {
+  opacity: 1;
+}
+
+.fade {
+  transition: opacity .15s linear;
+}
+
+.hide {
+  display: none;
+}
+
+.msg-box {
+  bottom: 0;
+  right: 0;
+  z-index: 999999;
+  position: fixed !important;
+}
+
+@media screen and (max-width: 645px) {
+
+  .cart-row-1 {
+    padding: 10px;
+  }
+
+  .item-field{
+    flex: 0 !important;
+  }
+
+  .cart-row-1 div{
+    padding-right: 10px;
+  }
+
+  .blank-field-1 {
+   position: absolute;
+  }
+
+  .cart-remove-field{
+    margin-top: 70px;
+position: absolute;
+float: right;
+margin-left: 15rem;
+  }
+  .row-image {
+    width: 100px !important;
+    height: 100px !important;
+    float: right;
+  }
+
+  /* .qty-cart {
+    line-height: 2.5;
+  }
+
+  .total-cart {
+    margin-top: -9px;
+  } */
+}

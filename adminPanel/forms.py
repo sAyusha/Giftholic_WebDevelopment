@@ -4,4 +4,4 @@ from cart.models import Order
 class OrderForm(ModelForm):
     class Meta:
         model = Order
-        fields = ('customer','product','status')
+        fields = '__all__'

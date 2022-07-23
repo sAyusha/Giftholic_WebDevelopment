@@ -2,18 +2,19 @@
 {% load static %}
 
 {% block title %}
-product name
+{{products.name}}
 {% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/detail-style.css' %}" type="text/css">
 <link rel="stylesheet" href="{% static 'css/display-style.css' %}" type="text/css">
-<div class="container product-detail mb-5 pb-4" style="margin-top:100px; width: 65% !important;">
-    <div class="box-element prod-content bg-light p-5">
-        <div class="clearfix d-flex">
+<div class="container product-detail mb-5 pb-4">
+    <div class="box-element prod-content d-flex bg-light p-5">
+        <div class="clearfix d-flex product-div">
             <div class="left-panel m-auto">
                 <div class="row">
                     <div class="col-lg-6">
-                        <img src="{{products.imageURL}}" class="row-image detail-image" alt="">
+                        <img src="{{products.imageURL}}" class="detail-image" alt="">
                     </div>
                 </div>
             </div>
@@ -67,7 +68,7 @@ product name
                             <div class="cartBtn d-flex justify-content-center align-items-center">
                                 {% if user.is_authenticated %}
                                     {% if products.available == True %}
-                                        <button id="addTocart" data-product="{{products.id}}" data-action="addWithQty" data-qty="1" class="addToCart update-cart">Add to Cart</button>
+                                        <button id="addTocart" data-product="{{products.id}}" data-action="add" data-qty="1" class="btn btn-info addToCart update-cart">Add to Cart</button>
             
                                     {% else %}
                                         <button class="outOfStock" disabled>Out of Stock</button>

@@ -10,10 +10,19 @@
     margin: 100px 0px 50px 0px;
 }
 
+.main-ctn .icon-border{
+    border-radius:200px; 
+    height:200px; 
+    width:200px; 
+    background: #B211C961; 
+    margin:0 auto;
+}
+
 .main-ctn  h1 {
-    color: #62C911;
-    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
-    font-weight: 900;
+    color: #B211C961;
+    font-weight: bolder;
+    font-style: italic;
+    text-transform: uppercase;
     font-size: 40px;
     margin-bottom: 10px;
     text-align: center;
@@ -68,4 +77,10 @@
 .card a:hover {
     font-size: 17px;
     color: #6d6bf0;
+}
+
+@media only screen and (max-width:665px){
+    .main-ctn{
+        margin-top: 30px !important;
+    }
 }

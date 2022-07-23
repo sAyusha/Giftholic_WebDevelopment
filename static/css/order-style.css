@@ -42,12 +42,18 @@
     line-height: 3;
 }
 
+.order-table tbody{
+    border-bottom: 1px solid #ccc;
+}
+
 .first-child{
     padding-left: 50px;
 }
 
 .order-image{
     width: 200px;
+    height: 150px;
+    margin-top: 10px;
 }
 
 .cartinput-number{
@@ -59,9 +65,57 @@
 @media only screen and (max-width: 665px){
     .img-container img{
         width: 100px !important;
+        height: 100px;
+        margin-top: -65px;
     }
 
-    table td .viewFavoriteBtn{
-        width: 100% !important;
+    .order-body{
+        margin-top: 0 !important;
+        padding: 5px !important;
+    }
+
+    .order-table{
+        line-height: 1.5 !important;
+    }
+
+    .first-child{
+        padding-left: 0 !important;
+    }
+
+    .order-table thead tr,
+    .order-table tbody tr{
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .order-table thead tr th{
+        border-bottom: 1px solid #ccc;
+        text-align: start !important;
+    }
+
+    .order-table tbody tr{
+        line-height: 1.6;
+        margin-top: -10.8rem;
+        float: right;
+    }
+
+    .order-product thead tr{
+        margin-top: 3rem;
+    }
+
+    .order-product .first-th-class{
+        margin-bottom: 65px;
+        border: 0;
+    }
+
+    .order-product tbody tr{
+        align-items: end;
+    }
+
+    .cartinput-number{
+        width: 16% !important;
+        height: 20px;
+        margin-left: 17rem;
     }
 }

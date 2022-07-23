@@ -21,23 +21,13 @@ class Order(models.Model):
             ('Out for delivery', 'Out for delivery'),
             ('Delivered', 'Delivered'),
             )
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=False, default="")
-    product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
+    user_info = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default="")
     date_ordered = models.DateTimeField(auto_now_add=True)
     payment_method = models.CharField(max_length=20,choices=METHOD, default="Cash on Delivery")
     complete = models.BooleanField(default=False,null=True,blank=True)
     paid = models.BooleanField(default=False,null=True,blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     status = models.CharField(max_length=200, choices=STATUS, null=True)
-
-    @property
-    def shipping(self):
-        shipping = False
-        orderitems = self.orderitem_set.all()
-        for i in orderitems:
-            if i.product.digital == False:
-                shipping = True
-        return shipping
 
     @property
     def get_cart_total(self):

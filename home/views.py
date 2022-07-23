@@ -4,7 +4,7 @@ from django.shortcuts import render
 from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-# from django.core.mail import send_mail
+from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
 # from django.forms import inlineformset_factory
@@ -18,12 +18,9 @@ from cart.models import Order
 
 from home.models import Contact
 from product.models import *
-from product.utils import cookieCart, cartData, guestOrder
+from product.utils import cookieCart, cartData
 
 # Create your views here.
-
-# @login_required(login_url='login')
-
 def index(request):
     current_user = request.user
     popularProducts = popularProduct.objects.all()
@@ -62,6 +59,13 @@ def contact(request):
         contact.message = message
         contact.save()
         messages.success(request, 'Thank You for Contacting Us!!')
+
+        send_mail('Contact Form',
+            message,
+            settings.EMAIL_HOST_USER,
+            ['ayushastha69@gmail.com'],
+            fail_silently=False
+            )
     context={
         'items':items,
         'order':order,

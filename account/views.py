@@ -11,10 +11,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from product.utils import cartData
-
-# Create your views here.
 from .forms import CreateUserForm, UserUpdateForm, ProfileUpdateForm
 
+# Create your views here.
 def loginPage(request):
     if request.user.is_authenticated:
         return redirect('index')

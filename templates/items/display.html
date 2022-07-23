@@ -2,13 +2,13 @@
 {% load static %}
 
 {% block title %}
-product display
+Product Display
 {% endblock %}
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/display-style.css' %}" type="text/css">
 <div class="container product-display">
-    <div class="top-heading" style="margin-top: 100px;">
+    <div class="top-heading">
         <h2 class="text-center text-uppercase"> All Gifts & Hampers </h2>
     </div>
 
@@ -28,7 +28,7 @@ product display
                     <button class="btn btn-outline-secondary add-btn disabled"> Add to Cart </button>
                     {% endif %}
                     <a class="btn btn-outline-success" href="/products/detail/{{product.id}}?product={{product.name}}">View</a>
-                    <h4 style="display: block; float: right;">Rs {{product.price}}</h4>
+                    <h4 class="price-heading">Rs {{product.price}}</h4>
                 </div>
             </div>
             {% endfor %}

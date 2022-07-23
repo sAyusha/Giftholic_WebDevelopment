@@ -13,7 +13,7 @@ from cart.models import Order
 
 from .models import *
 
-from .utils import cookieCart, cartData, guestOrder
+from .utils import cookieCart, cartData
 
 # Create your views here.
 def searchResult(request):
@@ -68,7 +68,7 @@ def displayPage(request):
     return render (request, 'items/categoryDisplay.html',context)
 
 def categoryDisplay(request, cat_id):
-    customer = request.user.customer
+    current_user = request.user
     data = cartData(request)
     cartItems = data['cartItems']
     order = data['order']
@@ -86,7 +86,6 @@ def categoryDisplay(request, cat_id):
         'filteredProd':filteredProd,
         'category_name': category_name,
         'allcategory':allcategory,
-        'customer': customer,
         'items':items,
         'order':order,
         'cartItems':cartItems,

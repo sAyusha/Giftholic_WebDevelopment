@@ -162,10 +162,6 @@ form .form-input {
     font-weight: bold;
 }
 
-/* .login-btn button{
-    margin-left: 0px !important;
-} */
-
 .error-msg #messages {
     text-align: center;
     border: 1px solid #5e5d5d;
@@ -342,7 +338,16 @@ h2 span {
     .container-1,
     .container-2 {
         width: 100vw !important;
-        height: 100vh;
+        height: 110vh;
+    }
+
+    .RespSearch{
+        display: none;
+    }
+
+    .container-1,
+    .container-2{
+        margin-top: 0 !important;
     }
 }
 

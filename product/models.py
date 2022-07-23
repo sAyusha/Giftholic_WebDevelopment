@@ -7,15 +7,6 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
-class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
-    name = models.CharField(max_length=200, null=True)
-    email = models.CharField(max_length=200, null=True)
-    date_created = models.DateTimeField(auto_now_add=True, null=True)
-
-    def __str__(self):
-        return self.name
-
 class Category(models.Model):
     name = models.CharField(max_length=100)
 
@@ -29,7 +20,6 @@ class Product(models.Model):
     description = models.TextField(blank=True, null=True)
     search_tags = models.TextField(blank=True,null=True)
     available = models.BooleanField(default=False, null=True, blank=False)
-    digital = models.BooleanField(default=False, null=True, blank=False)
     image = models.ImageField(null=True, blank=True)
     favorite = models.ManyToManyField(User,related_name='product_favorite')
     

@@ -1,17 +1,22 @@
 {% extends 'home/layout.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
+
+{% block title %}
+User-profile
+{% endblock %}
+
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/display-style.css' %}" type="text/css">
 <style>
     .alert {
-    position: relative;
-    height: 25px;
-    padding: 0px !important;
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0px);
-    transition: visibility 0s, opacity 250ms, transform 250ms;
+        position: relative;
+        height: 25px;
+        padding: 0px !important;
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0px);
+        transition: visibility 0s, opacity 250ms, transform 250ms;
     }
 
     .alert.hide {
@@ -24,7 +29,7 @@
 </style>
 <div class="container">
 
-    <div class="content-section bg-light p-3 mb-5" style="margin-top:100px;">
+    <div class="content-section bg-light p-3 mb-5">
         <div class="media d-flex mb-3">
             <img src="{{ user.profile.image.url }}" alt="" class="rounded-circle account-img ml-3">
             <div class="media-body pl-5 pt-5">

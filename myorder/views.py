@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from cart.models import Delivery, Order, OrderItem
 from checkout.models import ShippingAddress
 from myorder.models import MyOrder
-from product.models import Category, Customer
+from product.models import Category
 from product.utils import cartData
 
 @login_required (login_url="login")
@@ -34,11 +34,11 @@ def orderedItems(request,order_id):
 @login_required (login_url="login")
 def myOrder(request):
     allcategory = Category.objects.all()
+    customer = request.user
     data = cartData(request)
     cartItems = data['cartItems']
-    customer = request.user.customer
     
-    myorder = MyOrder.objects.filter(customer = customer)
+    myorder = MyOrder.objects.filter()
 
 
     context={

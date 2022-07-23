@@ -21,43 +21,43 @@ Giftholic- register
                 <form action="#" class="signup-form mt-2" method="POST">
                     {% csrf_token %}
     
-                    <div class="input-field form-group">
-                        <div class="input-group-append">
-                            <span class="input-group-text">
-                                <i class="fa fa-user"></i>
-                            </span>
+                        <div class="input-field form-group">
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <i class="fa fa-user"></i>
+                                </span>
                         </div>
-                        {{form.username}}
-                    </div>
-                    <div class="input-field form-group">
-                        <div class="input-group-append">
-                            <span class="input-group-text">
-                                <i class="fa fa-envelope"></i>
-                            </span>
+                            {{form.username}}
                         </div>
-                        {{ form.email }}
-                    </div>
-                    <div class="input-field form-group">
-                        <div class="input-group-append">
-                            <span class="input-group-text">
-                                <i class="fa fa-lock"></i>
-                            </span>
+                        <div class="input-field form-group">
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                            </div>
+                            {{ form.email }}
                         </div>
-                        {{ form.password1 }}
-                        <i class="toggle-password eye-icon fa fa-fw fa-eye-slash"></i>
-                    </div>
-                    <div class="input-field form-group">
-                        <div class="input-group-append">
-                            <span class="input-group-text">
-                                <i class="fa fa-unlock"></i>
-                            </span>
+                        <div class="input-field form-group">
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <i class="fa fa-lock"></i>
+                                </span>
+                            </div>
+                            {{ form.password1 }}
+                            <i class="toggle-password eye-icon fa fa-fw fa-eye-slash"></i>
                         </div>
-                        {{ form.password2 }}
-                        <i class="toggle-password eye-icon fa fa-fw fa-eye-slash"></i>
-                    </div>
-                    <div class="signup-btn form-group mt-3 mb-2">
-                        <button class="btn btn-secondary" type="submit"> Sign Up</button>
-                    </div>
+                        <div class="input-field form-group">
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <i class="fa fa-unlock"></i>
+                                </span>
+                            </div>
+                            {{ form.password2 }}
+                            <i class="toggle-password eye-icon fa fa-fw fa-eye-slash"></i>
+                        </div>
+                        <div class="signup-btn form-group mt-3 mb-2">
+                            <button class="btn btn-secondary" type="submit"> Sign Up</button>
+                        </div>
                 </form>
             </div>
 
@@ -89,10 +89,10 @@ Giftholic- register
 <script>
     // Query All input fields
     var form_fields = document.getElementsByTagName('input')
-    form_fields[2].placeholder = 'Username..';
-    form_fields[3].placeholder = 'Email..';
-    form_fields[4].placeholder = 'Password..';
-    form_fields[5].placeholder = 'Confirm Password..';
+    form_fields[3].placeholder = 'Username..';
+    form_fields[4].placeholder = 'Email..';
+    form_fields[5].placeholder = 'Password..';
+    form_fields[6].placeholder = 'Confirm Password..';
 
     for (var field in form_fields){
         form_fields[field].className += 'form-control'

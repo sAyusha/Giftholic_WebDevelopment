@@ -2,47 +2,14 @@
 {% load static %}
 
 {% block title %}
-display cart
+Giftholic- Cart
 {% endblock %}
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/display-style.css' %}" type="text/css">
-<style>
-    .fade.show {
-        opacity: 1;
-    }
+<link rel="stylesheet" href="{% static 'css/cart-style.css' %}" type="text/css">
 
-    .fade {
-        transition: opacity .15s linear;
-    }
-
-    .hide {
-        display: none;
-    }
-
-    .msg-box {
-        bottom: 0;
-        right: 0;
-        z-index: 999999;
-        position: fixed !important;
-    }
-
-    button.close {
-        padding: 0;
-        background-color: transparent;
-        border: 0;
-        -webkit-appearance: none;
-    }
-
-    .alert-dismissible .close {
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: .75rem 1.25rem;
-        color: inherit;
-    }
-</style>
-<div class="container cart-content" style="margin-top:100px;">
+<div class="container cart-content">
     <div class="row mb-5">
         <div class="col-lg-12">
             <div class="box-element">
@@ -65,14 +32,14 @@ display cart
             </div>
             <br>
 
-            <div class="box-element">
-                <div class="cart-row">
-                    <div style="flex:2;"></div>
-                    <div style="flex:2;"><strong>Item</strong></div>
+            <div class="box-element cart-element">
+                <div class="cart-row-1 d-flex mb-2">
+                    <div style="flex:2;" class="blank-field"></div>
+                    <div style="flex:2;" class="item-field"><strong>Item</strong></div>
                     <div style="flex:1;"><strong>Price</strong></div>
-                    <div style="flex:1;"><strong>Quantity</strong></div>
+                    <div style="flex:1;" class="qty-cart"><strong>Quantity</strong></div>
                     <div style="flex:1;"><strong>Total</strong></div>
-                    <div style="flex:1"></div>
+                    <div style="flex:1" class="blank-field-1"></div>
                 </div>
 
                 {% for item in items %}
@@ -91,15 +58,15 @@ display cart
                                 class="fa fa-caret-down chg-quantity update-cart"></i>
                         </div>
                     </div>
-                    <div style="flex:1;">Rs {{item.get_total}}</div>
-                    <div style="flex:1;">
+                    <div style="flex:1;" class="total-cart">Rs {{item.get_total}}</div>
+                    <div style="flex:1;" class="cart-remove-field">
                         <a href="#myModal" class="remove-btn text-danger" data-toggle="modal">Remove</a>
                         <!-- <a style="color: red; cursor:pointer;" class="update-cart" data-product="{{item.product.id}}" data-action="remove">Remove
                         </a> -->
                     </div>
                 </div>
 
-                <div id="myModal" class="modal fade" style="margin-top:150px;">
+                <div id="myModal" class="modal fade">
                     <div class="modal-dialog modal-confirm">
                         <div class="modal-content">
                             <div class="modal-header flex-column">

@@ -1,5 +1,11 @@
 {% extends 'home/layout.html' %}
 {% load static %}
+
+{% block title %}
+Giftholic- my order
+{% endblock %}
+
+
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/order-style.css' %}" type="text/css">
 <div class="container">
@@ -21,10 +27,10 @@
         </div>
         <div class="table-container">
 
-            <table class="order-table">
+            <table class="order-table order-product">
                 <thead>
                     <tr>
-                        <th scope="col"></th>
+                        <th scope="col" class="first-th-class"></th>
                         <th scope="col">Product</th>
                         <th scope="col" class="text-center">Price</th>
                         <th scope="col" class="text-center">Quantity</th>
@@ -42,7 +48,7 @@
                             </div>
                         </td>
                         <td data-label="Product">{{item.product.name}}</td>
-                        <td data-label="Price">रु{{item.product.price}}</td>
+                        <td data-label="Price">Rs. {{item.product.price}}</td>
                         <td data-label="Quantity">
                             <div class="qty-counter text-center d-flex justify-content-center align-items-center">
                                 <div class=" cartinput-group cartinput-number-group">

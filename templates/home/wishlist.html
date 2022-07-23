@@ -1,13 +1,12 @@
 {% extends 'home/layout.html' %}
 {% load static %}
 {% block title %}
-Cart
+Giftholic- Wishlist
 {% endblock %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/display-style.css' %}" type="text/css">
-<link rel="stylesheet" href="{% static 'css/order-style.css' %}" type="text/css">
 <div class="container">
-  <div class="tb-container bg-light mb-5 m-auto pb-2" style="margin-top: 100px !important;">
+  <div class="tb-container bg-light mb-5 m-auto pb-2">
     <div class="titleCtn extramargin d-flex align-items-center justify-content-between top-heading text-uppercase">
         <h4>Wishlist ( {{countWishlist}} )</h4>
     </div>
@@ -15,7 +14,7 @@ Cart
     <table class="favtable">
         <thead class="mb-4">
           <tr>
-            <th scope="col"></th>
+            <th scope="col" class="fav-firstchild"></th>
             <th scope="col">Product</th>
             <th scope="col">Price</th>
             <th scope="col"></th>
@@ -26,7 +25,7 @@ Cart
         <tbody>
           <tr>
             <td data-label="">
-                <div class="img-container m-auto">
+                <div class="fav-img m-auto">
                            <a href="{% url 'detail' item.id %}"> <img class="pt-2" src="{{item.image.url}}" alt="{{item.name}}" width="200px"> </a> 
                 </div>
             </td>

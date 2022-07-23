@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block title %}
-display cart
+Giftholic- Checkout
 {% endblock %}
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/display-style.css' %}" type="text/css">
-<div class="container checkout-content" style="margin-top:100px;">
+<div class="container checkout-content">
     <div class="row mb-5">
         <div class="col-lg-6">
             <div class="box-element" id="form-wrapper">
@@ -32,7 +32,7 @@ display cart
                             <input required type="text" class="form-control" name="zipcode" placeholder="Zip Code..">
                         </div>
                     </div>
-                    <div id="user-info">
+                    <div id="userinfo">
                         <hr>
                         <div class="form-field">
                             <input required type="text" class="form-control" name="name" placeholder="Name..">
@@ -62,15 +62,15 @@ display cart
                 <a href="{% url 'cart' %}" class="btn btn-outline-dark">&#x2190; Back to Cart</a>
                 <hr>
                 <h3> Order Summary </h3>
-                <hr>
                 {% for item in items %}
-                <div class="cart-row">
+                <hr>
+                <div class="cart-row checkout-row d-flex">
                     <div style="flex:1;"><img class="check-image" src="{{item.product.imageURL}}" alt=""></div>
                     <div style="flex:2;">
-                        <p>{{item.product.name}}</p>
+                        <p> {{item.product.name}}</p>
                     </div>
                     <div style="flex:1;">
-                        <p>{{item.product.price}}</p>
+                        <p>Rs. {{item.product.price}}</p>
                     </div>
                     <div>
                         <p>X{{item.quantity}}</p>
@@ -81,7 +81,6 @@ display cart
                 <h6><strong> Total: Rs {{order.get_cart_total}} </strong></h6>
             </div>
         </div>
-
     </div>
     <div id="msgChk" class="msg-box d-none alert alert-warning alert-dismissible fade show" role="alert">
         <strong>Hey!</strong> Please complete the shipping information.

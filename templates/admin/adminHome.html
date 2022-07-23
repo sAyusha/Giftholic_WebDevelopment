@@ -1,5 +1,9 @@
 {% extends 'admin/adminPanel.html' %}
 
+{% block title %}
+Giftholic- adminpanel
+{% endblock %}
+
 {% block body %}
 <div class="row">
     <div class="col col-md">
@@ -51,7 +55,7 @@
                 {% for customer in customer %}
                     <tr>
                         <td></td>
-                        <td>{{customer.name}}</td>
+                        <td>{{customer.username}}</td>
                         <td>{{customer.email}}</td>
                     </tr>
                 {% endfor %}
@@ -63,12 +67,11 @@
         <h5>Last 5 orders</h5>
         <hr>
         <div class="card card-body">
-            <a href="{% url 'order_add' %}" class="btn btn-primary btn-sm btn-block">
+            <a href="#" class="btn btn-primary btn-sm btn-block">
                 Create Order
             </a>
             <table class="table table-sm">
                 <tr>
-                    <th>Product</th>
                     <th>Date Ordered</th>
                     <th>Status</th>
                     <th>Update</th>
@@ -76,7 +79,6 @@
                 </tr>
                 {% for order in order %}
                     <tr>
-                        <td>{{order.product}}</td>
                         <td>{{order.date_created}}</td>
                         <td>{{order.status}}</td>
                         <td><a href="{% url 'order_edit' order.id %}" class="btn btn-sm btn-info">Update</a></td>
